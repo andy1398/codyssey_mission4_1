@@ -81,7 +81,8 @@ SSH 서비스가 변경된 포트(20022)에서 정상적으로 요청을 대기(
 ss -tulnp | grep sshd
 ```
 
-> [!WARNING] 위의 결과가 출력이 안되는 문제가 발생
+> [!WARNING] 
+>위의 결과가 출력이 안되는 문제가 발생
 >Ubuntu 22.04 환경에서는 SSH 서비스 이름이 ssh가 아닌 sshd로 등록되어 있거나, 포트 변경 후 서비스가 제대로 시작되지 않았을 수 있다고 함
 >sudo systemctl status ssh 를 사용하여, SSH 서비스의 현재 동작 상태(Active: active (running) 인지 확인)와 에러 로그를 점검
 >Active: active (running) 를 통해 SSH 서비스가 에러 없이 정상적으로 구동 중임을 알수 있다. 
@@ -226,7 +227,8 @@ sudo chown -R agent-admin:agent-common /home/agent-admin/agent-app && sudo chown
 sudo ls -la /home/agent-admin/agent-app/
 ```
 
->[!WARNING] 지금까지 일반 계정(agent-admin)으로 실행(루트 실행 금지)"과 "보안 정책 준수"를 만족하기 위해서 파일 압축 해제후 권한을 설정했음
+>[!WARNING] 
+>지금까지 일반 계정(agent-admin)으로 실행(루트 실행 금지)"과 "보안 정책 준수"를 만족하기 위해서 파일 압축 해제후 권한을 설정했음
 
 키파일 생성 & 660 권한 설정
 ```
@@ -252,9 +254,11 @@ export AGENT_LOG_DIR=/var/log/agent-app =>export를 쓴 이유는 다음과 같�
 AGENT_HOME/agent-app-linux-arm64
 ```
 
->[!WARNING] 에러발생 : Key Path Mismatch. Expected: /home/agent-admin/agent-app/api_keys => AGENT_KEY_PATH 환경 변수에 키 파일의 전체 경로(파일명 포함)가 지정되어 있기 때문임. AGENT_KEY_PATH 환경 변수 재설정하여 해결. export AGENT_KEY_PATH=/home/agent-admin/agent-app/api_keys
+>[!WARNING] 
+>에러발생 : Key Path Mismatch. Expected: /home/agent-admin/agent-app/api_keys => AGENT_KEY_PATH 환경 변수에 키 파일의 전체 경로(파일명 포함)가 지정되어 있기 때문임. AGENT_KEY_PATH 환경 변수 재설정하여 해결. export AGENT_KEY_PATH=/home/agent-admin/agent-app/api_keys
 
->[!WARNING] 에러발생 : [3/5] Checking Required Files [FAIL]
+>[!WARNING] 
+>에러발생 : [3/5] Checking Required Files [FAIL]
 >>> Missing File: secret.key
 >>> (Expected location: /home/agent-admin/agent-app/api_keys/secret.key)
 >애플리케이션이 요구하는 비밀키 파일 이름이 t_secret.key가 아니라 secret.key이기 때문임. 기존에 만들어둔 t_secret.key 파일을 앱이 찾는 secret.key 이름으로 복사하거나 새로 생성해 주면 됨. cp /home/agent-admin/agent-app/api_keys/t_secret.key /home/agent-admin/agent-app/api_keys/secret.key 
