@@ -56,7 +56,7 @@ multipass shell agent-server
 
 * 성공시 ubuntu@agent-server:~$  이렇게 뜬다.
 
-SSH 설정 파일 편집
+- SSH 설정 파일 편집
 sudo nano /etc/ssh/sshd_config
 sudo: SuperUser DO의 약자로, 관리자(root) 권한으로 명령을 실행합니다. (보안 설정 수정 시 필수)
 nano: 터미널 기반 텍스트 편집기입니다.
