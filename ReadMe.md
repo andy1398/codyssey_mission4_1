@@ -29,8 +29,8 @@ Daemon/Tool : OpenSSH Server, UFW, Cron, top, free, df
 # 실행과정
 가상머신을 설치하여 진행하였다. 
 ```
-brew install --cask multipass```
-
+brew install --cask multipass
+```
 가상머신 버젼은 아래와 같다.```
 multipass   1.16.4+mac
 multipassd  1.16.4+mac```
