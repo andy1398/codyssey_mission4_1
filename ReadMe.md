@@ -207,6 +207,7 @@ monitor.sh 스크립트 작성
 sudo nano /home/agent-admin/agent-app/bin/monitor.sh
 
 스크립트 내용
+```
 #!/bin/bash
 export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 LOG_DIR="/var/log/agent-app"
@@ -257,70 +258,96 @@ if [ -f "$LOG_FILE" ]; then
         ls -t $LOG_DIR/monitor.log.* 2>/dev/null | tail -n +10 | xargs -r rm -f
     fi
 fi
+```
 
 권한설정 및 crontab 등록
+```
 sudo chown agent-dev:agent-core /home/agent-admin/agent-app/bin/monitor.sh
 sudo chmod 750 /home/agent-admin/agent-app/bin/monitor.sh
 echo "* * * * * /home/agent-admin/agent-app/bin/monitor.sh >/dev/null 2>&1" | sudo crontab -u agent-admin -l
+```
 
 자동 누적 확인
+```
 sudo tail -n 5 /var/log/agent-app/monitor.log
+```
 
 결과
+```
 [WARNING] MEM usage is over 10%: 16%
 [2026-09-19 HH:14:01] PID:2854 CPU:2% MEM:16% DISK_USED:20%
 [WARNING] UFW Firewall is inactive.
 [WARNING] MEM usage is over 10%: 17%
 [2026-09-19 HH:15:02] PID:2854 CPU:4% MEM:17% DISK_USED:20% 
+```
 
 
 # 터미널 입력만 모음
 # SSH 포트 변경(20022) 및 Root 로그인 차단
+```
 sudo sed -i 's/^#*Port 22/Port 20022/' /etc/ssh/sshd_config
 sudo sed -i 's/^#*PermitRootLogin.*/PermitRootLogin no/' /etc/ssh/sshd_config
 sudo systemctl restart ssh
+```
 
 # UFW 방화벽 포트 개방 및 활성화
+```
 sudo ufw allow 20022/tcp
 sudo ufw allow 15034/tcp
 sudo ufw --force enable
+```
 
 # 그룹 및 계정 생성
+```
 sudo groupadd agent-common
 sudo groupadd agent-core
 sudo useradd -m -g agent-common -G agent-core agent-admin
 sudo useradd -m -g agent-common -G agent-core agent-dev
 sudo useradd -m -g agent-common agent-test
+```
 
 # 디렉터리 생성
+```
 sudo mkdir -p /home/agent-admin/agent-app/{upload_files,api_keys,bin}
 sudo mkdir -p /var/log/agent-app
+```
 
 # 소유권 지정
+```
 sudo chown -R agent-admin:agent-common /home/agent-admin/agent-app
 sudo chown -R agent-admin:agent-core /home/agent-admin/agent-app/api_keys
 sudo chown -R agent-admin:agent-core /var/log/agent-app
+```
 
 # 권한 지정 (775 / 770)
+```
 sudo chmod -R 775 /home/agent-admin/agent-app/upload_files
 sudo chmod -R 770 /home/agent-admin/agent-app/api_keys
 sudo chmod -R 770 /var/log/agent-app
+```
 
 # 압축 해제 유틸리티 설치
+```
 sudo apt update && sudo apt install -y unzip
+```
 
 # 비밀키 파일 생성 및 660 권한 부여
+```
 echo "agent_api_key_test" | sudo tee /home/agent-admin/agent-app/api_keys/secret.key > /dev/null
 echo "agent_api_key_test" | sudo tee /home/agent-admin/agent-app/api_keys/t_secret.key > /dev/null
 sudo chown -R agent-admin:agent-core /home/agent-admin/agent-app/api_keys
 sudo chmod 660 /home/agent-admin/agent-app/api_keys/*.key
+```
 
 # 앱 압축 해제 및 실행 권한 부여
+```
 sudo unzip -o /home/agent-admin/agent-app/agent-app.zip -d /home/agent-admin/agent-app/
 sudo chmod +x /home/agent-admin/agent-app/agent-app-linux-arm64
 sudo chown -R agent-admin:agent-common /home/agent-admin/agent-app
+```
 
 # 백그라운드로 애플리케이션 구동
+```
 sudo -u agent-admin bash -c '
 export AGENT_HOME=/home/agent-admin/agent-app
 export AGENT_PORT=15034
@@ -330,14 +357,21 @@ export AGENT_LOG_DIR=/var/log/agent-app
 
 nohup $AGENT_HOME/agent-app-linux-arm64 > /dev/null 2>&1 &
 '
+```
 
 # 스크립트 작성(생략)
 
 # agent-admin crontab 매분 등록
+```
 echo "* * * * * /home/agent-admin/agent-app/bin/monitor.sh >/dev/null 2>&1" | sudo crontab -u agent-admin -
+```
 
 # 등록 결과 확인
+```
 sudo crontab -u agent-admin -l
+```
 
 # 1분 뒤 누적 로그 확인
+```
 sudo tail -n 5 /var/log/agent-app/monitor.log
+```
