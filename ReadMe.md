@@ -13,6 +13,7 @@ Shell : Bash (Bourne-Again SHell)
 Daemon/Tool : OpenSSH Server, UFW, Cron, top, free, df
 
 # 디렉토리 구조
+**
 /home/agent-admin/agent-app/
 ├── api_keys/               [770, agent-admin:agent-core]   # 보안 디렉터리 (Secret Keys)
 │   ├── secret.key          [660, agent-admin:agent-core]   # API 비밀키 파일
@@ -24,7 +25,7 @@ Daemon/Tool : OpenSSH Server, UFW, Cron, top, free, df
 
 /var/log/agent-app/         [770, agent-admin:agent-core]   # 시스템 관제 로그 저장소
 └── monitor.log             [660, agent-admin:agent-core]   # 관제 데이터 누적 로그 파일
-
+**
 # 실행과정
 가상머신을 설치하여 진행하였다. 
 brew install --cask multipass
