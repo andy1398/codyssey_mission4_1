@@ -140,7 +140,7 @@ QA/테스트 계정으로 agent-test 생성 (기본 그룹: agent-common, 보조
 sudo useradd -m -g agent-common -G agent-core agent-admin && sudo useradd -m -g agent-common -G agent-core agent-dev && sudo useradd -m -g agent-common agent-test
 ```
 
-* 최소 권한 원칙 : 사용자, 프로그램, 또는 시스템 프로세스에게 업무를 수행하는 데 필요한 '최소한의 권한'만 부여해야 한다는 보안 기본 원칙
+> [!NOTE] 최소 권한 원칙 : 사용자, 프로그램, 또는 시스템 프로세스에게 업무를 수행하는 데 필요한 '최소한의 권한'만 부여해야 한다는 보안 기본 원칙
 
 agent-admin와 agent-dev와 agent-test를 별 번호(UID), 기본 그룹(GID), 그리고 소속된 모든 보조 그룹 목록을 화면에 출력
 ```
