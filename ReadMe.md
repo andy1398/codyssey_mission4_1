@@ -1,16 +1,20 @@
 # 미션 개요
+```
 기본 보안 강화: SSH 접속 포트 변경(20022) 및 Root 원격 로그인 차단[cite: 2, 3, 6, 7]
 네트워크 보안: UFW 방화벽 활성화를 통한 필요 최소 인바운드 포트만 허용[cite: 4]
 최소 권한 원칙 (RBAC): 역할 기반 그룹/계정 분리 및 보안 디렉터리 접근 제어[cite: 8, 9, 10, 12]
 애플리케이션 구동: 일반 계정 기반 5단계 Boot Sequence 통과 (Agent READY)[cite: 16, 17]
 관제 자동화: 프로세스/포트 Health Check, 자원 수집, 임계값 경고 및 로그 롤링 구현
 주기적 실행: crontab 매분 실행을 통한 관제 데이터 누적 및 자동화 검증[cite: 4]
+```
 
 # 개발 및 실습 환경
+```
 OS : Ubuntu 22.04 LTS (Multipass Virtual Machine)
 Resources : 2 Cores / 2 GB RAM / 10 GB Disk
 Shell : Bash (Bourne-Again SHell)
 Daemon/Tool : OpenSSH Server, UFW, Cron, top, free, df
+```
 
 # 디렉토리 구조
 ```
