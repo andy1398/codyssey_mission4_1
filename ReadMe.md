@@ -27,23 +27,23 @@ Daemon/Tool : OpenSSH Server, UFW, Cron, top, free, df
 └── monitor.log             [660, agent-admin:agent-core]   # 관제 데이터 누적 로그 파일
 ```
 # 실행과정
-가상머신을 설치하여 진행하였다. 
-brew install --cask multipass
+가상머신을 설치하여 진행하였다. ```
+brew install --cask multipass```
 
-가상머신 버젼은 아래와 같다.
+가상머신 버젼은 아래와 같다.```
 multipass   1.16.4+mac
-multipassd  1.16.4+mac
+multipassd  1.16.4+mac```
 
-우분투 22.04 LTS 최신 이미지로 가상머신을 생성 및 실행+생성할 가상머신의 이름을 agent-server+CPU 2코어, RAM 2GB, 용량 10GB의 독립된 리눅스 자원을 할당
-multipass launch 22.04 --name agent-server --cpus 2 --memory 2G --disk 10G
+우분투 22.04 LTS 최신 이미지로 가상머신을 생성 및 실행+생성할 가상머신의 이름을 agent-server+CPU 2코어, RAM 2GB, 용량 10GB의 독립된 리눅스 자원을 할당```
+multipass launch 22.04 --name agent-server --cpus 2 --memory 2G --disk 10G```
 
-현재 동작 중인 가상머신 목록과 IP, 상태(Running)를 확인
+현재 동작 중인 가상머신 목록과 IP, 상태(Running)를 확인```
  ~ % multipass list
 Name                    State             IPv4             Image
-agent-server            Running           192.168.252.2    Ubuntu 22.04 LTS
+agent-server            Running           192.168.252.2    Ubuntu 22.04 LTS```
 
-가상머신 내부 접속
-multipass shell agent-server
+가상머신 내부 접속```
+multipass shell agent-server```
 
 * 성공시 ubuntu@agent-server:~$  이렇게 뜬다.
 
