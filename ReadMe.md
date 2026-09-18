@@ -81,16 +81,17 @@ SSH 서비스가 변경된 포트(20022)에서 정상적으로 요청을 대기(
 ss -tulnp | grep sshd
 ```
 
-* 위의 결과가 출력이 안되는 문제가 발생
-Ubuntu 22.04 환경에서는 SSH 서비스 이름이 ssh가 아닌 sshd로 등록되어 있거나, 포트 변경 후 서비스가 제대로 시작되지 않았을 수 있다고 함
-sudo systemctl status ssh 를 사용하여, SSH 서비스의 현재 동작 상태(Active: active (running) 인지 확인)와 에러 로그를 점검
-Active: active (running) 를 통해 SSH 서비스가 에러 없이 정상적으로 구동 중임을 알수 있다. 
-sshd[1944]: Server listening on 0.0.0.0 port 20022. 를 통해 포트 변경이 20022가 성공했읍을 알수 있다. 
-프로세스 이름인 ssh 대신 변경된 포트 번호 20022가 정상동작이 확인 되었기 때문에 ss -tulnp | grep 20022 로 하면 정상 출력된 결과를 확인 할수 있음
-결과는 아래와 같음
-tcp LISTEN 0 128 0.0.0.0:20022 0.0.0.0:* 이것은 IPv4 기반이다. 
+> [!WARNING] 위의 결과가 출력이 안되는 문제가 발생
+>Ubuntu 22.04 환경에서는 SSH 서비스 이름이 ssh가 아닌 sshd로 등록되어 있거나, 포트 변경 후 서비스가 제대로 시작되지 않았을 수 있다고 함
+>sudo systemctl status ssh 를 사용하여, SSH 서비스의 현재 동작 상태(Active: active (running) 인지 확인)와 에러 로그를 점검
+>Active: active (running) 를 통해 SSH 서비스가 에러 없이 정상적으로 구동 중임을 알수 있다. 
+>sshd[1944]: Server listening on 0.0.0.0 port 20022. 를 통해 포트 변경이 20022가 성공했읍을 알수 있다. 
+>프로세스 이름인 ssh 대신 변경된 포트 번호 20022가 정상동작이 확인 되었기 때문에 ss -tulnp | grep 20022 로 하면 정상 출력된 결과를 확인 할수 있음
+>결과는 아래와 같음
+```tcp LISTEN 0 128 0.0.0.0:20022 0.0.0.0:* 이것은 IPv4 기반이다. 
 tcp LISTEN 0 128 [::]:20022 [::]:* 이것은 IPv6 기반이다. 
 모두 20022 포트가 (LISTEN 이 적혀있으므로) 접속 대기중임을 나타낸다. 
+```
 
 1. 1. Root 원격 접속 차단 설정 확인
 ```
